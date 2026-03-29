@@ -1,9 +1,10 @@
-import Scene from "./scenes/Scene";
+// import Scene from "./scenes/Scene";
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <div style={{ height: "100vh" }}>
-      <Scene />
+    <div>
+      <Home />
     </div>
   );
 }
