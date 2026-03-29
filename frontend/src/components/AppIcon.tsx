@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import gsap from "gsap";
 
-type AppIconProps = {
-  label: string;
-  icon: React.ReactNode;
-  onClick?: () => void;
-};
+type AppIconProps =
+  | {
+      label: string;
+      icon: React.ReactNode;
+      imgSrc?: never;
+      onClick?: () => void;
+    }
+  | { label: string; imgSrc: string; icon?: never; onClick?: () => void };
 
-export default function AppIcon({ label, icon, onClick }: AppIconProps) {
+export default function AppIcon({
+  label,
+  icon,
+  imgSrc,
+  onClick,
+}: AppIconProps) {
   const [active, setActive] = useState(false);
 
-  // 🎮 iOS-style bounce on click
+  // iOS-style bounce on click
   const handleClick = (e: any) => {
     setActive(true);
 
@@ -36,7 +44,7 @@ export default function AppIcon({ label, icon, onClick }: AppIconProps) {
       onClick={handleClick}
       className="flex flex-col items-center justify-center group"
     >
-      {/* 📱 ICON */}
+      {/* ICON */}
       <div
         className={`
           w-12 h-12 rounded-xl 
@@ -49,7 +57,7 @@ export default function AppIcon({ label, icon, onClick }: AppIconProps) {
           group-hover:scale-110
         `}
       >
-        {icon}
+        {icon ? icon : <img src={imgSrc} alt={label} className="w-6 h-6" />}
       </div>
 
       {/* LABEL */}
